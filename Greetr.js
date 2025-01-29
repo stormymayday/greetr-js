@@ -5,8 +5,61 @@
         return new Greetr.init(firstName, lastName, language);
     };
 
+    const supportedLangs = ["en", "es"];
+
+    // Greetings for supported languages
+    const greetings = {
+        en: "Hello",
+        es: "Hola",
+    };
+
+    const formalGreetings = {
+        en: "Greetings",
+        es: "Saludos",
+    };
+
+    const logMessages = {
+        en: "Logged in",
+        es: "Inicio sesión",
+    };
+
     // Greetr.prototype – The place where you define methods that all Greetr instances can use.
-    Greetr.prototype = {};
+    Greetr.prototype = {
+        fullName() {
+            return `${this.firstName} ${this.lastName}`;
+        },
+
+        validate() {
+            if (!supportedLangs.includes(this.language)) {
+                throw "Invalid language";
+            }
+        },
+
+        greeting() {
+            return `${greetings[this.language]} ${this.firstName}`;
+        },
+
+        formalGreeting() {
+            return `${formalGreetings[this.language]} ${this.fullName()}`;
+        },
+
+        greet(formal) {
+            const msg = formal ? this.formalGreeting() : this.greeting();
+            console.log(msg);
+            return this;
+        },
+
+        log() {
+            console.log(`${logMessages[this.language]}: ${this.fullName()}`);
+            return this;
+        },
+
+        setLang(lang) {
+            this.language = lang;
+            this.validate();
+            return this;
+        },
+    };
 
     // Greetr.init Constructor – This is the actual constructor that gets used to initialize the instance and its properties.
     Greetr.init = function (firstName, lastName, language) {

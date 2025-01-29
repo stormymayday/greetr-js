@@ -1,3 +1,3 @@
-const g = G$("John", "Doe");
+const g = G$("John", "Doe", "en");
 
-console.log(g);
+g.greet().setLang("fr").greet(true);
