@@ -1,1 +1,3 @@
-console.log(`hello`);
+const g = G$("John", "Doe");
+
+console.log(g);
